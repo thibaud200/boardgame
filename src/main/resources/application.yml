@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    # Base de données H2 en mémoire (effacée à chaque redémarrage)
+    url: jdbc:h2:mem:boardgame-db;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    # Important : Hibernate crée les tables avant d'exécuter data.sql
+    defer-datasource-initialization: true
+    hibernate:
+      # create-drop : recrée le schéma à chaque lancement (idéal pour le dev)
+      # update      : met à jour sans supprimer les données existantes
+      ddl-auto: update   # Crée les tables à partir de tes entités
+    properties:
+      hibernate:
+        # Spécifie le dialecte SQL pour H2
+        dialect: org.hibernate.dialect.H2Dialect
+    # Affiche les requêtes SQL générées dans la console
+    show-sql: true
+  sql:
+    init:
+      # always : exécute toujours data.sql au démarrage (si présent)
+      mode: always
+  h2:
+    console:
+      # Active la console web H2 (pour voir la base de données)
+      enabled: true
+      path: /h2-console
+logging:
+  # Configuration des logs
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    com.boardgame: DEBUG  # logs détaillés pour ton code
+  file:
+    # Sauvegarde les logs dans un fichier local
+    name: logs/boardgame.log
+  pattern:
+    # Format d'affichage des logs
+    console: "%d{HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n"
