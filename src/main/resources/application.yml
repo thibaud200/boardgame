@@ -27,6 +27,10 @@ spring:
       # Active la console web H2 (pour voir la base de données)
       enabled: true
       path: /h2-console
+bgg:
+  base-url: https://api.geekdo.com/xmlapi2
+  connect-timeout-ms: 3000
+  read-timeout-ms: 5000
 logging:
   # Configuration des logs
   level:
